@@ -38,3 +38,13 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+app.get('/submissions', async (req, res) => {
+    try {
+        const submissions = await Form.find();
+        res.json(submissions);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
